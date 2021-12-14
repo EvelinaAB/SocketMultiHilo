@@ -15,18 +15,28 @@ public class GestorListin {
     }
     
     public synchronized boolean insertar(String nombre, String teléfono) {
-        
+        Persona p = new Persona(nombre, teléfono);
+        if (listin.add(p)) {
+            return true;
+        }
+
         return false;
     }
-    
-    public synchronized Persona buscar(String nombre){
 
+    public synchronized Persona buscar(String nombre) {
+        for (Persona o : listin) {
+            if (o.nombre == nombre) {
+                return o;
+            }
+        }
         return null;
     }
-    
 
-    public synchronized boolean eliminar(String nombre){
-        
+    public synchronized boolean eliminar(String nombre) {
+         Persona p2=this.buscar(nombre);
+         if(listin.remove(p2)){
+             return true;
+         }
         return false;
     }
 }
